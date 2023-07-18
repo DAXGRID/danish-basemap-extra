@@ -52,4 +52,4 @@ ogr2ogr -f GeoJSONSeq -append -sql "SELECT 'hegn' as objecttype FROM hegn" $outp
 
 # # Building tileset
 log_time_text echo 'Building tileset from danish-basemap.geojson.'
-tippecanoe --minimum-zoom=16 --maximum-zoom=16 --force --output=./data/objects.mbtiles ./data/danish-basemap.geojson
+tippecanoe --minimum-zoom=16 --maximum-zoom=16 --force --output=$output_dir/objects.mbtiles $output_dir/danish-basemap.geojson

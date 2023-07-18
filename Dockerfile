@@ -23,7 +23,7 @@ WORKDIR /
 RUN apt-get update && \
     apt-get install -y bash libicu72 gdal-bin build-essential libsqlite3-dev zlib1g-dev git
 
-# Build tippecnaoe
+# Build tippecanoe .
 RUN git clone https://github.com/mapbox/tippecanoe.git
 
 WORKDIR /tippecanoe
@@ -31,7 +31,7 @@ WORKDIR /tippecanoe
 RUN make \
   && make install
 
-# Remove the temp directory and unneeded packages
+# Remove the temp directory and unneeded packages.
 WORKDIR /
 RUN rm -rf /tmp/tippecanoe-src \
   && apt-get -y remove --purge build-essential && apt-get -y autoremove
