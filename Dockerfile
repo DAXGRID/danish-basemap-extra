@@ -15,12 +15,28 @@ RUN dotnet publish -r linux-x64 -p:PublishSingleFile=true --self-contained true 
 # Runtime image
 FROM debian:stable-20230703
 
-WORKDIR /app
+WORKDIR /
 
 # libicu is needed to support unicode in the DanishGeoJsonExtractor.
 # bash is needed to run our bash shell script.
+# Build essentials and libsqlite and zlib1g is needed for tippecanoe.
 RUN apt-get update && \
-    apt-get install -y bash libicu72 gdal-bin
+    apt-get install -y bash libicu72 gdal-bin build-essential libsqlite3-dev zlib1g-dev git
+
+# Build tippecnaoe
+RUN git clone https://github.com/mapbox/tippecanoe.git
+
+WORKDIR /tippecanoe
+
+RUN make \
+  && make install
+
+# Remove the temp directory and unneeded packages
+WORKDIR /
+RUN rm -rf /tmp/tippecanoe-src \
+  && apt-get -y remove --purge build-essential && apt-get -y autoremove
+
+WORKDIR /app
 
 COPY --from=build-extractor /danish-geojson-extractor/DanishGeoJsonExtractor .
 COPY /appsettings.json .
