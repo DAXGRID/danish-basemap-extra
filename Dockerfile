@@ -20,7 +20,6 @@ WORKDIR /app
 # bash is needed to run our bash shell script.
 RUN apt update && apt install -y bash libicu72
 
-# Copy the executable and DDL's to the empty container
 COPY --from=build-extractor /danish-geojson-extractor/DanishGeoJsonExtractor .
 COPY /extractor/appsettings.json .
 COPY run.sh .
