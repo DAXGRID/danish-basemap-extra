@@ -1,7 +1,8 @@
 # Build danish geojson extractor
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build-extractor
 
-RUN apt update && apt install git
+RUN apt-get update && \
+    apt-get install git
 
 WORKDIR /
 
@@ -18,10 +19,11 @@ WORKDIR /app
 
 # libicu is needed to support unicode in the DanishGeoJsonExtractor.
 # bash is needed to run our bash shell script.
-RUN apt update && apt install -y bash libicu72
+RUN apt-get update && \
+    apt-get install -y bash libicu72 gdal-bin
 
 COPY --from=build-extractor /danish-geojson-extractor/DanishGeoJsonExtractor .
-COPY /extractor/appsettings.json .
+COPY /appsettings.json .
 COPY run.sh .
 
 ENTRYPOINT ["./run.sh"]
