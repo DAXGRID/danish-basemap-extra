@@ -2,7 +2,7 @@
 
 set -e
 
-output_dir="$HOME/datafordeler"
+output_dir="$(pwd)/data"
 
 log_time_text() {
     echo "$(date "+%Y-%m-%d %H:%M:%S") - $1"
