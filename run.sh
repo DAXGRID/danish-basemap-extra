@@ -12,7 +12,7 @@ log_time_text "Creating output dir $output_dir"
 mkdir -p $output_dir
 
 log_time_text "Starting download files."
-./extractor/DanishGeoJsonExtractor "$(pwd)/extractor/appsettings.json"
+./DanishGeoJsonExtractor "$(pwd)/appsettings.json"
 
 # Handle Bygning
 log_time_text "Processing bygning."
