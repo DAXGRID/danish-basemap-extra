@@ -20,8 +20,9 @@ WORKDIR /
 # libicu is needed to support unicode in the DanishGeoJsonExtractor.
 # bash is needed to run our bash shell script.
 # Build essentials and libsqlite and zlib1g is needed for tippecanoe.
+# Curl is needed to upload the file to the file-server.
 RUN apt-get update && \
-    apt-get install -y bash libicu72 gdal-bin build-essential libsqlite3-dev zlib1g-dev git
+    apt-get install -y bash libicu72 gdal-bin build-essential libsqlite3-dev zlib1g-dev git curl
 
 # Build tippecanoe .
 RUN git clone https://github.com/mapbox/tippecanoe.git
