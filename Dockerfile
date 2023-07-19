@@ -39,7 +39,6 @@ RUN rm -rf /tmp/tippecanoe-src \
 WORKDIR /app
 
 COPY --from=build-extractor /danish-geojson-extractor/DanishGeoJsonExtractor .
-COPY /appsettings.json .
 COPY run.sh .
 
 ENTRYPOINT ["./run.sh"]
