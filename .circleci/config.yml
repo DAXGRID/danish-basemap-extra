@@ -57,8 +57,6 @@ workflows:
       - docker-publish-image:
           context: docker
           requires:
-           - build-app
-           - test-app
            - build-docker-image
           filters:
             tags:
