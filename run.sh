@@ -8,7 +8,7 @@ log_time_text() {
     echo "$(date "+%Y-%m-%d %H:%M:%S") - $1"
 }
 
-log_time_text 'Creating output dir $output_dir'
+log_time_text "Creating output dir $output_dir"
 mkdir -p $output_dir
 
 log_time_text 'Starting download files.'
