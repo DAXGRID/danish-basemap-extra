@@ -82,4 +82,4 @@ log_time_text 'Building tileset from danish-basemap.geojson.'
 tippecanoe --minimum-zoom=16 --maximum-zoom=16 --force --output=$output_dir/objects.mbtiles $output_dir/danish-basemap.geojson
 
 # Upload file to the filesever
-curl -u $(FILE_SERVER_USERNAME):$(FILE_SERVER_PASSWORD) -F 'file=@$(output_dir/objects.mbtiles)' '$(FILE_SERVER_URI)/?upload'
+curl -u $FILE_SERVER_USERNAME:$FILE_SERVER_PASSWORD -F "file=@$(output_dir)/objects.mbtiles" "$FILE_SERVER_URI/?upload"
