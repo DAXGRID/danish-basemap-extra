@@ -84,3 +84,6 @@ tippecanoe --minimum-zoom=16 --maximum-zoom=16 --force --output=$output_dir/obje
 # Upload file to the filesever
 log_time_text 'Uploading the tiles to the fileserver.'
 curl -u $FILE_SERVER_USERNAME:$FILE_SERVER_PASSWORD -F "file=@$output_dir/objects.mbtiles" "$FILE_SERVER_URI/?upload"
+
+log_time_text 'Cleaning up everything that is left.'
+rm $output_dir/objects.mbtiles $output_dir/danish-basemap.geojson
