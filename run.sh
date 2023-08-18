@@ -32,12 +32,18 @@ rm $output_dir/matrikelskel.geojson
 log_time_text 'Extracting only necessary properties from vejkant.'
 ogr2ogr -f GeoJSONSeq -append -sql "SELECT 'vejkant' as objecttype FROM vejkant" $output_dir/danish-basemap.geojson $output_dir/vejkant.geojson
 
-log_time_text 'Removing up vejkant.geojson.'
+log_time_text 'Removing vejkant.geojson.'
 rm $output_dir/vejkant.geojson
 
 # Vejmidte
+log_time_text 'Running add_vejnavn_to_vejmidte.py'
+python3 ./add_vejnavn_to_vejmidte.py $output_dir
+
+log_time_text 'Overwriting vejmidte.geojson with vejmidte_with_vejnavn.geojson.'
+mv -f vejmidte_with_vejnavn.geojson vejmidte.geojson
+
 log_time_text 'Extracting only necessary properties from vejmidte.'
-ogr2ogr -f GeoJSONSeq -append -sql "SELECT 'vejmidte' as objecttype FROM vejmidte" $output_dir/danish-basemap.geojson $output_dir/vejmidte.geojson
+ogr2ogr -f GeoJSONSeq -append -sql "SELECT 'vejmidte' as objecttype, vejnavn FROM vejmidte" $output_dir/danish-basemap.geojson $output_dir/vejmidte.geojson
 
 log_time_text 'Removing up vejmidte.geojson.'
 rm $output_dir/vejmidte.geojson
