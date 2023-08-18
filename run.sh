@@ -18,14 +18,14 @@ log_time_text 'Starting download files.'
 log_time_text 'Extracting only necessary properties from bygning.'
 ogr2ogr -f GeoJSONSeq -append -sql "SELECT 'bygning' as objecttype, status FROM bygning" $output_dir/danish-basemap.geojson $output_dir/bygning.geojson
 
-log_time_text 'Cleaning up bygning.geojson'
+log_time_text 'Cleaning bygning.geojson'
 rm $output_dir/bygning.geojson
 
 # Skel
 log_time_text 'Extracting only necessary properties from skel.'
 ogr2ogr -f GeoJSONSeq -append -sql "SELECT 'skel' as objecttype FROM matrikelskel" $output_dir/danish-basemap.geojson $output_dir/matrikelskel.geojson
 
-log_time_text 'Removing up matrikelskel.geojson.'
+log_time_text 'Removing matrikelskel.geojson.'
 rm $output_dir/matrikelskel.geojson
 
 # Vejkant
@@ -45,42 +45,42 @@ mv -f vejmidte_with_vejnavn.geojson vejmidte.geojson
 log_time_text 'Extracting only necessary properties from vejmidte.'
 ogr2ogr -f GeoJSONSeq -append -sql "SELECT 'vejmidte' as objecttype, vejnavn FROM vejmidte" $output_dir/danish-basemap.geojson $output_dir/vejmidte.geojson
 
-log_time_text 'Removing up vejmidte.geojson.'
+log_time_text 'Removing vejmidte.geojson.'
 rm $output_dir/vejmidte.geojson
 
 # Helle
 log_time_text 'Extracting only necessary properties from helle.'
 ogr2ogr -f GeoJSONSeq -append -sql "SELECT 'helle' as objecttype FROM helle" $output_dir/danish-basemap.geojson $output_dir/helle.geojson
 
-log_time_text 'Removing up helle.geojson.'
+log_time_text 'Removing helle.geojson.'
 rm $output_dir/helle.geojson
 
 # Nedloebsrist
 log_time_text 'Extracting only necessary properties from nedloebsrist.'
 ogr2ogr -f GeoJSONSeq -append -sql "SELECT 'nedloebsrist' as objecttype FROM nedloebsrist" $output_dir/danish-basemap.geojson $output_dir/nedloebsrist.geojson
 
-log_time_text 'Removing up nedloebsrist.geojson.'
+log_time_text 'Removing nedloebsrist.geojson.'
 rm $output_dir/nedloebsrist.geojson
 
 # Broenddaeksel
 log_time_text 'Extracting only necessary properties from broenddaeksel.'
 ogr2ogr -f GeoJSONSeq -append -sql "SELECT 'broenddaeksel' as objecttype FROM broenddaeksel" $output_dir/danish-basemap.geojson $output_dir/broenddaeksel.geojson
 
-log_time_text 'Removing up broenddaeksel.geojson.'
+log_time_text 'Removing broenddaeksel.geojson.'
 rm $output_dir/broenddaeksel.geojson
 
 # Lysmast
 log_time_text 'Extracting only necessary properties from mast.'
 ogr2ogr -f GeoJSONSeq -append -sql "SELECT 'mast' as objecttype FROM mast" $output_dir/danish-basemap.geojson $output_dir/mast.geojson
 
-log_time_text 'Removing up mast.geojson.'
+log_time_text 'Removing mast.geojson.'
 rm $output_dir/mast.geojson
 
 # Hegn
 log_time_text 'Extracting only necessary properties from hegn.'
 ogr2ogr -f GeoJSONSeq -append -sql "SELECT 'hegn' as objecttype FROM hegn" $output_dir/danish-basemap.geojson $output_dir/hegn.geojson
 
-log_time_text 'Removing up hegn.geojson.'
+log_time_text 'Removing hegn.geojson.'
 rm $output_dir/hegn.geojson
 
 # Building tileset
@@ -91,5 +91,5 @@ tippecanoe --minimum-zoom=16 --maximum-zoom=16 --force --output=$output_dir/obje
 log_time_text 'Uploading the tiles to the fileserver.'
 curl -u $FILE_SERVER_USERNAME:$FILE_SERVER_PASSWORD -F "file=@$output_dir/objects.mbtiles" "$FILE_SERVER_URI/?upload"
 
-log_time_text 'Cleaning up everything that is left.'
+log_time_text 'Cleaning everything that is left.'
 rm $output_dir/objects.mbtiles $output_dir/danish-basemap.geojson
