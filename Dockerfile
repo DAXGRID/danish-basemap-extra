@@ -21,8 +21,11 @@ WORKDIR /
 # bash is needed to run our bash shell script.
 # Build essentials and libsqlite and zlib1g is needed for tippecanoe.
 # Curl is needed to upload the file to the file-server.
+# Python3 is needed for Python script to include 'vejnavn' to 'vejmidte'.
+# python3-ijson is required to stream JSON files in the python script.
+# python3-simplejson is required to handle decimal numbers in python script
 RUN apt-get update && \
-    apt-get install -y bash libicu72 gdal-bin build-essential libsqlite3-dev zlib1g-dev git curl
+    apt-get install -y bash libicu72 gdal-bin build-essential libsqlite3-dev zlib1g-dev git curl python3 python3-ijson python3-simplejson
 
 # Build tippecanoe .
 RUN git clone https://github.com/mapbox/tippecanoe.git
