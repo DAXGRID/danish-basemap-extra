@@ -1,13 +1,10 @@
+import sys
+
 # Required to handle decimal numbers.
 import simplejson as json
 
 # We need ijson to be able stream the big JSON files.
 import ijson
-
-vej_file_path = '/datafordeler/vej.geojson'
-navngivenvej_file_path = '/datafordeler/navngivenvejkommunedel.geojson'
-vejmidte_file_path = '/datafordeler/vejmidte.geojson'
-out_path = '/datafordeler/merged.geojson'
 
 def load_geojson(filePath):
     geojson_file_content = None
@@ -34,6 +31,17 @@ def create_vej_lookup(veje):
     return vej_lookup;
 
 def main():
+    if len(sys.argv) != 2:
+        print("Please specify a directory path to the files.")
+        sys.exit(1)
+
+    files_directory_path = sys.argv[1]
+
+    vej_file_path = f"{files_directory_path}/vej.geojson"
+    navngivenvej_file_path = f"{files_directory_path}/navngivenvejkommunedel.geojson"
+    vejmidte_file_path = f"{files_directory_path}/vejmidte.geojson"
+    out_path = f"{files_directory_path}/vejmidte_with_vejnavn.geojson"
+
     navngivenvej_lookup = create_navngivenvej_lookup(
         load_geojson(navngivenvej_file_path)["features"])
 
