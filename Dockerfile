@@ -43,6 +43,7 @@ RUN rm -rf /tmp/tippecanoe-src \
 WORKDIR /app
 
 COPY --from=build-extractor /danish-geojson-extractor/DanishGeoJsonExtractor .
-COPY add_vejnavn_to_vejmidte.py run.sh .
+COPY run.sh .
+COPY add_vejnavn_to_vejmidte.py .
 
 ENTRYPOINT ["./run.sh"]
