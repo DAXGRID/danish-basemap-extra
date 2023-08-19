@@ -45,8 +45,8 @@ mv -f $output_dir/vejmidte_with_vejnavn.geojson $output_dir/vejmidte.geojson
 log_time_text 'Extracting only necessary properties from vejmidte.'
 ogr2ogr -f GeoJSONSeq -append -sql "SELECT 'vejmidte' as objecttype, vejnavn FROM vejmidte" $output_dir/danish-basemap.geojson $output_dir/vejmidte.geojson
 
-log_time_text 'Removing vejmidte.geojson.'
-rm $output_dir/vejmidte.geojson
+log_time_text 'Removing vejmidte.geojson, vejnavn.geojson and vejmidte_with_vejnavn.geojson.'
+rm $output_dir/vejmidte.geojson $output_dir/vejmidte_with_vejnavn.geojson $output_dir/vejnavn.geojson
 
 # Helle
 log_time_text 'Extracting only necessary properties from helle.'
