@@ -16,7 +16,7 @@ def load_geojson(filePath):
 def create_navngivenvej_lookup(navngivenvej_kommunedele):
     navngivenvej_lookup = {}
     for navngivenvej_kommunedel in navngivenvej_kommunedele:
-        properties = navngivenvej_kommunedel["properties"]
+        properties = navngivenvej_kommunedel['properties']
         unique_key = f"{properties['kommune']}-{properties['vejkode']}"
         navngivenvej_lookup[unique_key] = properties['navngivenvej_id']
 
@@ -32,7 +32,7 @@ def create_vej_lookup(veje):
 
 def main():
     if len(sys.argv) != 2:
-        print("Please specify a directory path to the files.")
+        print('Please specify a directory path to the files.')
         sys.exit(1)
 
     files_directory_path = sys.argv[1]
@@ -43,13 +43,13 @@ def main():
     out_path = f"{files_directory_path}/vejmidte_with_vejnavn.geojson"
 
     navngivenvej_lookup = create_navngivenvej_lookup(
-        load_geojson(navngivenvej_file_path)["features"])
+        load_geojson(navngivenvej_file_path)['features'])
 
     vej_lookup = create_vej_lookup(
-        load_geojson(vej_file_path)["features"])
+        load_geojson(vej_file_path)['features'])
 
-    with open(vejmidte_file_path, "rb") as json_file:
-        features = ijson.items(json_file, "features.item")
+    with open(vejmidte_file_path, 'rb') as json_file:
+        features = ijson.items(json_file, 'features.item')
 
         with open(out_path, 'a', encoding='utf8') as json_out_file:
             for feature in features:
@@ -62,7 +62,7 @@ def main():
                         vejnavn = vej_lookup[navngivenvej_lookup[f"{kommunekode}-{vejkode}"]]
                         feature_properties['vejnavn'] = vejnavn
                         json_string = json.dumps(feature, ensure_ascii=False)
-                        json_out_file.write(json_string + "\n")
+                        json_out_file.write(json_string + '\n')
                     except KeyError:
                         print(f"Could not lookup {kommunekode}-{vejkode}")
 
