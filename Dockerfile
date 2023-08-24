@@ -32,8 +32,7 @@ RUN git clone https://github.com/mapbox/tippecanoe.git
 
 WORKDIR /tippecanoe
 
-RUN make \
-  && make install
+RUN make && make install
 
 # Remove the temp directory and unneeded packages.
 WORKDIR /
