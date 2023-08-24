@@ -25,7 +25,18 @@ WORKDIR /
 # python3-ijson is required to stream JSON files in the python script.
 # python3-simplejson is required to handle decimal numbers in python script.
 RUN apt-get update && \
-    apt-get install -y bash libicu72 gdal-bin build-essential libsqlite3-dev zlib1g-dev git curl python3 python3-ijson python3-simplejson
+    apt-get install -y \
+    bash=5.2.15-2+b2 \
+    libicu72=72.1-3 \
+    gdal-bin=3.6.2+dfsg-1+b2 \
+    build-essential=12.9 \
+    libsqlite3-dev=3.40.1-2 \
+    zlib1g-dev=1:1.2.13.dfsg-1 \
+    git=1:2.39.2-1.1 \
+    curl=7.88.1-10+deb12u1 \
+    python3=3.11.2-1+b1 \
+    python3-ijson=3.2.0-1 \
+    python3-simplejson=3.18.3-1
 
 # Build tippecanoe .
 RUN git clone https://github.com/mapbox/tippecanoe.git
