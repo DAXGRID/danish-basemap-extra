@@ -1,5 +1,5 @@
 # Build danish geojson extractor
-FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build-extractor
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build-extractor
 
 RUN apt-get update && \
     apt-get install git
