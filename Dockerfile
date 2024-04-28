@@ -10,7 +10,7 @@ RUN git clone https://github.com/DAXGRID/danish-geojson-extractor.git repo
 
 WORKDIR /repo
 
-RUN dotnet publish -r linux-x64 -p:PublishSingleFile=true --self-contained true -o /danish-geojson-extractor
+RUN dotnet publish -r linux-x64 -p:PublishSingleFile=true --self-contained true --property:PublishDir=/danish-geojson-extractor
 
 # Runtime image
 FROM debian:stable-20230703
