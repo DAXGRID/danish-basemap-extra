@@ -33,7 +33,7 @@ RUN apt-get update && \
     libsqlite3-dev=3.40.1-2 \
     zlib1g-dev=1:1.2.13.dfsg-1 \
     git=1:2.39.2-1.1 \
-    curl=7.88.1-10+deb12u5 \
+    curl=7.88.1-10+deb12u6 \
     python3=3.11.2-1+b1 \
     python3-ijson=3.2.0-1 \
     python3-simplejson=3.18.3-1
