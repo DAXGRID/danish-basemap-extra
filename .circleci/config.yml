@@ -5,7 +5,7 @@ executors:
     environment:
       IMAGE_NAME: openftth/danish-basemap-extra
     docker:
-      - image: cimg/base:2022.12
+      - image: cimg/base:2025.02
         auth:
           username: $DOCKER_LOGIN
           password: $DOCKER_ACCESSTOKEN
