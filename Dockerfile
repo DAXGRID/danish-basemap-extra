@@ -10,12 +10,12 @@ RUN git clone https://github.com/DAXGRID/danish-geojson-extractor.git repo
 
 WORKDIR /repo
 
-RUN git checkout 7e53306c79ca06f93984ff5f12efab0189343903
+RUN git checkout 0213aef20896fdbbed71282c92a80439e7cdd3a4
 
 RUN dotnet publish -r linux-x64 -p:PublishSingleFile=true --self-contained true --property:PublishDir=/danish-geojson-extractor
 
 # Runtime image
-FROM debian:stable-20230703
+FROM debian:stable
 
 WORKDIR /
 
@@ -28,17 +28,17 @@ WORKDIR /
 # python3-simplejson is required to handle decimal numbers in python script.
 RUN apt-get update && \
     apt-get install -y \
-    bash=5.2.15-2+b2 \
-    libicu72=72.1-3 \
-    gdal-bin=3.6.2+dfsg-1+b2 \
-    build-essential=12.9 \
-    libsqlite3-dev=3.40.1-2 \
-    zlib1g-dev=1:1.2.13.dfsg-1 \
-    git=1:2.39.2-1.1 \
-    curl=7.88.1-10+deb12u6 \
-    python3=3.11.2-1+b1 \
-    python3-ijson=3.2.0-1 \
-    python3-simplejson=3.18.3-1
+    bash \
+    libicu72 \
+    gdal-bin \
+    build-essential \
+    libsqlite3-dev \
+    zlib1g-dev \
+    git \
+    curl \
+    python3 \
+    python3-ijson \
+    python3-simplejson
 
 # Build tippecanoe .
 RUN git clone -b 1.36.0 https://github.com/mapbox/tippecanoe.git
