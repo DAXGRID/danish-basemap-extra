@@ -87,9 +87,7 @@ workflows:
           context: docker
           filters:
             tags:
-              only: /^v.*/
-            branches:
-              ignore: /.*/
+              only: /.*/
       - docker-publish-image:
           context: docker
           requires:
