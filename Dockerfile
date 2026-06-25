@@ -1,5 +1,5 @@
 # Build danish geojson extractor
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build-extractor
+FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build-extractor
 
 RUN apt-get update && \
     apt-get install git
@@ -10,7 +10,7 @@ RUN git clone https://github.com/DAXGRID/danish-geojson-extractor.git repo
 
 WORKDIR /repo
 
-RUN git checkout 0213aef20896fdbbed71282c92a80439e7cdd3a4
+RUN git checkout 9a41f4d2f302ba4d5c6a5c0a33d167f63f60969f
 
 RUN dotnet publish -r linux-x64 -p:PublishSingleFile=true --self-contained true --property:PublishDir=/danish-geojson-extractor
 
@@ -29,9 +29,9 @@ WORKDIR /
 RUN apt-get update && \
     apt-get install -y \
     bash \
-    libicu72 \
     gdal-bin \
     build-essential \
+    libicu76 \
     libsqlite3-dev \
     zlib1g-dev \
     git \
