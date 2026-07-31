@@ -10,7 +10,7 @@ RUN git clone https://github.com/DAXGRID/danish-geojson-extractor.git repo
 
 WORKDIR /repo
 
-RUN git checkout 9a41f4d2f302ba4d5c6a5c0a33d167f63f60969f
+RUN git checkout d9f29d06719d14d454abf1cafe82efe4a106d4bb
 
 RUN dotnet publish -r linux-x64 -p:PublishSingleFile=true --self-contained true --property:PublishDir=/danish-geojson-extractor
 
