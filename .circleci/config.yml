@@ -16,7 +16,7 @@ executors:
       GIT_USER_NAME: "dax-bot"
       GIT_USER_EMAIL: "admin@dax.dk"
       GIT_CLONE_REPO: "git@github.com:DAXGRID/dax-charts.git"
-      SSH_FINGERPRINT: "SHA256:U3FTLSjcaovGAaWF73bJduLVnjyEYJZr79d5nX+vBU8"
+      SSH_FINGERPRINT: "SHA256:3wpUxC/uaP6LVu6sjTtpItsVYgZlS/zq/cRNxCTWGHg"
     docker:
     - image: alpine/git
 
