@@ -41,7 +41,7 @@ RUN apt-get update && \
     python3-simplejson
 
 # Build tippecanoe .
-RUN git clone -b 1.36.0 https://github.com/mapbox/tippecanoe.git
+RUN git clone -b 2.79.0 https://github.com/felt/tippecanoe.git
 
 WORKDIR /tippecanoe
 
