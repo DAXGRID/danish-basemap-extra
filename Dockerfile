@@ -1,8 +1,7 @@
 # Build danish geojson extractor
-FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build-extractor
+FROM mcr.microsoft.com/dotnet/sdk:10.0-alpine AS build-extractor
 
-RUN apt-get update && \
-    apt-get install git
+RUN apk add --no-cache git
 
 WORKDIR /
 
@@ -14,43 +13,40 @@ RUN git checkout d9f29d06719d14d454abf1cafe82efe4a106d4bb
 
 RUN dotnet publish -r linux-x64 -p:PublishSingleFile=true --self-contained true --property:PublishDir=/danish-geojson-extractor
 
+FROM alpine AS tippecanoe-builder
+
+WORKDIR /tmp
+
+RUN apk add --no-cache build-base git zlib-dev sqlite-dev bash
+
+RUN git clone --depth 1 --branch 2.79.0 https://github.com/felt/tippecanoe.git tippecanoe-src
+
+RUN make -C tippecanoe-src -j"$(nproc)"
+
+RUN make -C tippecanoe-src install
+
 # Runtime image
-FROM debian:stable
+FROM alpine
 
 WORKDIR /
 
 # libicu is needed to support unicode in the DanishGeoJsonExtractor.
 # bash is needed to run our bash shell script.
-# build essentials and libsqlite and zlib1g is needed for tippecanoe.
 # curl is needed to upload the file to the file-server.
 # python3 is needed for Python script to include 'vejnavn' to 'vejmidte'.
 # python3-ijson is required to stream JSON files in the python script.
 # python3-simplejson is required to handle decimal numbers in python script.
-RUN apt-get update && \
-    apt-get install -y \
+RUN apk add --no-cache \
     bash \
-    gdal-bin \
-    build-essential \
-    libicu76 \
-    libsqlite3-dev \
-    zlib1g-dev \
+    gdal \
+    icu-libs \
     git \
     curl \
     python3 \
-    python3-ijson \
-    python3-simplejson
+    py3-ijson \
+    py3-simplejson
 
-# Build tippecanoe .
-RUN git clone -b 2.79.0 https://github.com/felt/tippecanoe.git
-
-WORKDIR /tippecanoe
-
-RUN make && make install
-
-# Remove the temp directory and unneeded packages.
-WORKDIR /
-RUN rm -rf /tmp/tippecanoe-src \
-  && apt-get -y remove --purge build-essential && apt-get -y autoremove
+COPY --from=tippecanoe-builder /usr/local/bin/tippecanoe /usr/local/bin/
 
 WORKDIR /app
 
