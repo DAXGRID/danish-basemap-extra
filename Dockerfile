@@ -11,7 +11,7 @@ WORKDIR /repo
 
 RUN git checkout d9f29d06719d14d454abf1cafe82efe4a106d4bb
 
-RUN dotnet publish -r linux-x64 -p:PublishSingleFile=true --self-contained true --property:PublishDir=/danish-geojson-extractor
+RUN dotnet publish -r linux-musl-x64 -p:PublishSingleFile=true --self-contained true --property:PublishDir=/danish-geojson-extractor
 
 FROM alpine AS tippecanoe-builder
 
