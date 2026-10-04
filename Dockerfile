@@ -39,6 +39,8 @@ WORKDIR /
 RUN apk add --no-cache \
     bash \
     gdal \
+    gdal-tools \
+    gdal-driver-all \
     icu-libs \
     git \
     curl \
