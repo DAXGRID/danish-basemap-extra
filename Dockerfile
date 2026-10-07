@@ -36,7 +36,7 @@ WORKDIR /
 # python3 is needed for Python script to include 'vejnavn' to 'vejmidte'.
 # python3-ijson is required to stream JSON files in the python script.
 # python3-simplejson is required to handle decimal numbers in python script.
-RUN apk add --no-cache \
+RUN apk update && apk add --no-cache \
     bash \
     gdal \
     gdal-tools \
